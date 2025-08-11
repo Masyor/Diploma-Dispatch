@@ -81,13 +81,12 @@ const studentImageEl = document.getElementById('student-image');
 const studentDilemmaEl = document.getElementById('student-dilemma');
 const diplomaDropdown = document.getElementById('diploma-dropdown');
 const submitEnrolButton = document.getElementById('submit-enrol');
-const almanacButton = document.getElementById('almanac-button');
 const almanacModal = document.getElementById('almanac-modal');
 const almanacContentEl = document.getElementById('almanac-content');
 const finalScoreEl = document.getElementById('final-score');
 const performanceMessageEl = document.getElementById('performance-message');
 
-const enrolOnlineButton = document.getElementById('enrol-now-button'); // New button on game end screen
+const enrolNowButton = document.getElementById('enrol-now-button'); // Renamed variable
 const backToScoreScreenButton = document.getElementById('back-to-score-screen-button'); // New button on app enroll screen
 
 function shuffle(array) {
@@ -125,7 +124,7 @@ function showScreen(screenId) {
         }
     }
 }
-
+ 
 function showFeedbackMessage(message) {
     console.log(message);
 }
@@ -142,7 +141,6 @@ function startGame() {
     studentsServed = 0;
     randomizedStudents = shuffle([...allStudents]).slice(0, maxStudents);
     populateDiplomaDropdown();
-    createAlmanacContent();
     loadNextStudent();
     showScreen('desk');
 }
@@ -164,8 +162,16 @@ function initializeGame() {
     document.getElementById('play-button').addEventListener('click', startGame);
     document.getElementById('instructions-button').addEventListener('click', () => showScreen('instructions-screen'));
     document.getElementById('return-button').addEventListener('click', () => showScreen('intro-screen'));
-    almanacButton.addEventListener('click', openAlmanac);
     submitEnrolButton.addEventListener('click', handleSubmit);
+    
+    // Select all elements with the almanac-button ID and attach the event listener.
+    // NOTE: HTML IDs should be unique. Using document.querySelectorAll for this
+    // handles both buttons in your provided HTML. A cleaner approach would be
+    // to give them a unique ID or a shared class.
+    const almanacButtons = document.querySelectorAll('#almanac-button');
+    almanacButtons.forEach(button => {
+        button.addEventListener('click', openAlmanac);
+    });
     
     // Updated "Play Again" button listener
     document.getElementById('play-again-button').addEventListener('click', () => {
@@ -175,12 +181,17 @@ function initializeGame() {
     });
 
     // New event listeners for the ACE App enrolment screen buttons
-    if (enrolOnlineButton) {
-        enrolOnlineButton.addEventListener('click', () => showScreen('app-enroll-screen'));
+    if (enrolNowButton) {
+        enrolNowButton.addEventListener('click', () => showScreen('app-enroll-screen'));
     }
     if (backToScoreScreenButton) {
         backToScoreScreenButton.addEventListener('click', () => showScreen('game-end-screen'));
     }
+
+    // Populate the almanac content and dropdown right when the game is initialized
+    // This ensures the data is ready even if the user opens the almanac from the intro screen
+    populateDiplomaDropdown();
+    createAlmanacContent();
     
     showScreen('intro-screen');
 }
@@ -194,7 +205,7 @@ function populateDiplomaDropdown() {
         diplomaDropdown.appendChild(option);
     });
 }
-
+ 
 function createAlmanacContent() {
     almanacContentEl.innerHTML = '';
     diplomas.forEach(diploma => {
@@ -237,19 +248,19 @@ function handleSubmit() {
     }
 
     const isCorrect = selectedDiplomaId === currentStudent.courseNeeded;
-    
+     
     const submitButton = submitEnrolButton;
     submitButton.classList.add(isCorrect ? 'correct-stamp' : 'incorrect-stamp');
 
     setTimeout(() => {
         submitButton.classList.remove('correct-stamp', 'incorrect-stamp');
-        
+         
         if (isCorrect) {
             score++;
         }
-        
+         
         studentsServed++;
-        
+         
         loadNextStudent();
     }, 500);
 }
@@ -266,7 +277,7 @@ function endGame() {
     gameMusic.pause();
     showScreen('game-end-screen');
     finalScoreEl.textContent = score;
-    
+     
     let message = '';
     const percentage = (score / maxStudents) * 100;
     if (percentage >= 80) {
