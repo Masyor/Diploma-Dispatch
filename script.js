@@ -27,7 +27,10 @@ const allDiplomas = [
     { id: 'ps', name: 'Public Speaking', description: 'This course helps students become self-assured and capable public speakers. It focuses on reducing anxiety, structuring effective speeches, using body language, and engaging an audience with confidence.' },
 ];
 
-const diplomas = allDiplomas.filter(d => termCourses.includes(d.name));
+// Filter the diplomas to only include those for the current term,
+// then sort them alphabetically by name.
+const diplomas = allDiplomas.filter(d => termCourses.includes(d.name))
+                            .sort((a, b) => a.name.localeCompare(b.name));
 
 const allStudents = [
     { image: 'img/arv1.png', dilemma: 'I am taking a new course that requires me to read complex research papers. I need to improve my reading speed and comprehension for academic texts.', courseNeeded: 'arv2' },
@@ -291,3 +294,4 @@ function endGame() {
 }
 
 window.addEventListener('load', initializeGame);
+
