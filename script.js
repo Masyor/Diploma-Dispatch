@@ -1,24 +1,27 @@
 // --- Game Data ---
 const termCourses = [
-    'Academic Reading & Vocabulary 2',
-    'Advanced Communication Skills For STEM',
-    'Speaking & Pronunciation',
-    'Listening & Note Taking Skills 1',
-    'Business Writing Skills',
-    'Critical Thinking & Analysis Skills',
-    'Cultures of ASEAN',
-    'International Relations & Diplomacy',
-    'English for Tourism',
-    'Debate',
-    'Public Speaking'
+    'av',
+    'awr',
+    'acs',
+    'ai',
+    'ctapss',
+    'lants2',
+    'et',
+    'dbt',
+    'ps'
 ];
 
 const allDiplomas = [
     { id: 'arv2', name: 'Academic Reading & Vocabulary 2', description: 'A follow-up to Academic Reading & Vocabulary 1, this course builds upon the strategies learned to improve reading comprehension and further extends a student\'s knowledge of academic vocabulary through the analysis of more complex and discipline-specific texts.' },
     { id: 'acs', name: 'Advanced Communication Skills For STEM', description: 'This course is tailored for students in science, technology, engineering, and mathematics (STEM) fields. It focuses on effective communication of complex technical information to various audiences, including presentations, report writing, and collaborative discussions.' },
+    { id: 'av', name: 'Academic Vocabulary', description: 'This course is designed to broaden your knowledge and understanding of advanced-level vocabulary, thereby enhancing your lexical repertoire. By completing this course, you will gain greater confidence in using a wide range of academic vocabulary, ultimately improving your reading and writing skills.' },
+    { id: 'awr', name: 'Academic Writing & Research', description: 'This course will enable you to plan, research, and produce high-quality essays, teaching you the essential skills to write a strong essay or research paper. Upon completion, you will approach essay writing with confidence and produce work of an internationally recognised academic standard while understanding the principles of academic research.' },
+    { id: 'ai', name: 'Advanced IELTS', description: 'This course will help you to prepare for the IELTS exam and improve all of your English skills. Ultimately, you will become a better reader, listener, writer, and speaker, allowing you to approach the IELTS exam with more confidence.' },
+    { id: 'lants2', name: 'Listening & Note Taking Skills 2', description: 'This course provides further listening and notetaking strategies to optimize your academic and/or business capability. Upon completion, you will be able to effectively tackle real-world academic or business activities with ease and confidently approach unfamiliar vocabulary.' },
     { id: 'sp', name: 'Speaking & Pronunciation', description: 'This course focuses on becoming a more capable and fluent English speaker. It covers key pronunciation features, intonation, and rhythm, helping students to communicate with greater clarity and confidence in both formal and informal situations.' },
     { id: 'lnts1', name: 'Listening & Note Taking Skills 1', description: 'This course develops fundamental listening and note-taking skills crucial for graduate or post-graduate study in an English-speaking environment. It teaches students how to process and record information from lectures and academic discussions effectively.' },
     { id: 'bws', name: 'Business Writing Skills', description: 'This course contributes to professional growth by developing essential writing skills for a business environment. It includes writing clear and concise reports, proposals, memos, and emails, and focuses on professional tone and structure.' },
+    { id: 'ctapss', name: 'Creative Thinking & Problem Solving Skills', description: 'This course is designed to enhance your capacity to think creatively and enable you to solve problems using a variety of innovative strategies. By the end of the course, you will have enhanced problem-solving skills and a greater understanding of how to apply creative thinking in real-life situations.' },
     { id: 'ctas', name: 'Critical Thinking & Analysis Skills', description: 'This course enables students to think and function more effectively in the real world by teaching them to assess the validity of information. Students learn to identify logical fallacies, construct sound arguments, and analyze complex topics from multiple perspectives.' },
     { id: 'coa', name: 'Cultures of ASEAN', description: 'This course equips students with a deep understanding of how culture is defined within the Association of Southeast Asian Nations (ASEAN). It explores cultural diversity, shared heritage, and the social dynamics of the region.' },
     { id: 'ird', name: 'International Relations & Diplomacy', description: 'This course helps students become knowledgeable about and work in the field of international relations. It explores global political issues, diplomatic practices, and the role of international organizations.' },
@@ -29,8 +32,9 @@ const allDiplomas = [
 
 // Filter the diplomas to only include those for the current term,
 // then sort them alphabetically by name.
-const diplomas = allDiplomas.filter(d => termCourses.includes(d.name))
-                            .sort((a, b) => a.name.localeCompare(b.name));
+const diplomas = allDiplomas.filter(d => termCourses.includes(d.id))
+                            .sort((a, b) => a.id.localeCompare(b.id));
+
 
 const allStudents = [
     { image: 'img/arv1.png', dilemma: 'I am taking a new course that requires me to read complex research papers. I need to improve my reading speed and comprehension for academic texts.', courseNeeded: 'arv2' },
@@ -57,6 +61,9 @@ const allStudents = [
     { image: 'img/ps2.png', dilemma: 'I want to be a motivational speaker. I need a course that will help me with speech writing, delivery techniques, and audience engagement to inspire my listeners.', courseNeeded: 'ps' },
     { image: 'img/ps3.png', dilemma: 'I have a fear of speaking in front of people. While I can talk one-on-one, I freeze up when I have to present to a group. I need to overcome this stage fright.', courseNeeded: 'ps' },
 ];
+
+const selectStudents = allStudents.filter(d => termCourses.includes(d.courseNeeded))
+                            .sort((a, b) => a.courseNeeded.localeCompare(b.courseNeeded));
 
 let score = 0;
 let studentsServed = 0;
@@ -142,7 +149,7 @@ function startGame() {
 
     score = 0;
     studentsServed = 0;
-    randomizedStudents = shuffle([...allStudents]).slice(0, maxStudents);
+    randomizedStudents = shuffle([...selectStudents]).slice(0, maxStudents);
     populateDiplomaDropdown();
     loadNextStudent();
     showScreen('desk');
@@ -294,4 +301,5 @@ function endGame() {
 }
 
 window.addEventListener('load', initializeGame);
+
 
