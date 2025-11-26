@@ -60,6 +60,18 @@ const allStudents = [
     { image: 'img/ps1.png', dilemma: 'I have to give a presentation to a large audience next month for my company, and I am very nervous. I need to learn how to write and deliver a confident and engaging speech.', courseNeeded: 'ps' },
     { image: 'img/ps2.png', dilemma: 'I want to be a motivational speaker. I need a course that will help me with speech writing, delivery techniques, and audience engagement to inspire my listeners.', courseNeeded: 'ps' },
     { image: 'img/ps3.png', dilemma: 'I have a fear of speaking in front of people. While I can talk one-on-one, I freeze up when I have to present to a group. I need to overcome this stage fright.', courseNeeded: 'ps' },
+    { image: 'img/av1.png', dilemma: 'I often read university-level articles, but I encounter too many complex and specialized words that prevent me from fully understanding the main concepts. My comprehension suffers.', courseNeeded: 'av' },
+    { image: 'img/av2.png', dilemma: 'When writing my essays and reports, my vocabulary feels too simple and repetitive. I want to learn how to use a wider range of precise, high-level academic language to improve my grades.', courseNeeded: 'av' },
+    { image: 'img/awr1.png', dilemma: 'I am about to start a major research project, but I do not know how to structure a formal academic essay, conduct proper research, or write a strong thesis statement.', courseNeeded: 'awr' },
+    { image: 'img/awr2.png', dilemma: 'I keep losing marks because my referencing is incorrect (APA/MLA/Harvard), and I struggle with integrating sources and evidence smoothly into my own arguments.', courseNeeded: 'awr' },
+    { image: 'img/awr3.png', dilemma: 'My written work lacks logical flow and analytical depth. I need to learn advanced techniques for developing sophisticated arguments and maintaining a formal academic tone.', courseNeeded: 'awr' },
+    { image: 'img/ai1.png', dilemma: 'I have taken the IELTS test but need to raise my score from 6.0 to 7.5 (or higher) to meet the entry requirements for my postgraduate program. I need specific advanced strategies.', courseNeeded: 'ai' },
+    { image: 'img/ai2.png', dilemma: 'I can follow most conversations, but I struggle with the academic Listening section of the IELTS test, especially when the lecture contains complex vocabulary or unfamiliar accents.', courseNeeded: 'ai' },
+    { image: 'img/ai3.png', dilemma: 'I consistently struggle with IELTS Writing Task 2. I need to master high-level grammar, cohesion, and essay structures that score consistently in the Band 7–8 range.', courseNeeded: 'ai' },
+    { image: 'img/lants21.png', dilemma: 'My university lectures are fast-paced and packed with details. I can’t capture the essential information effectively, and my notes are disorganized, which makes studying difficult.', courseNeeded: 'lants2' },
+    { image: 'img/lants22.png', dilemma: 'I need to be able to identify key arguments, infer meaning, and recall information from complex academic discussions and technical presentations for my career, but I often miss critical details.', courseNeeded: 'lants2' },
+    { image: 'img/ctapss1.png', dilemma: 'I am often criticized for being too rigid and uninventive in my approach to work challenges. I need systematic frameworks to generate fresh, innovative ideas and solutions.', courseNeeded: 'ctapss' },
+    { image: 'img/ctapss2.png', dilemma: 'When faced with an unexpected or complex problem, I tend to panic and get stuck. I want to learn techniques to break down difficult issues and develop creative, effective solutions under pressure.', courseNeeded: 'ctapss' },
 ];
 
 const selectStudents = allStudents.filter(d => termCourses.includes(d.courseNeeded))
@@ -301,5 +313,6 @@ function endGame() {
 }
 
 window.addEventListener('load', initializeGame);
+
 
 
